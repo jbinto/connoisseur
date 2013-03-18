@@ -11,7 +11,7 @@ else
 	if ARGV[0] == "index"
     generator.index
 	elsif ARGV[0] == "show"
-    generator.show
+    generator.show(ARGV[1])
 	else
 		puts "Unrecognized action. Please refer to USAGE."
 	end

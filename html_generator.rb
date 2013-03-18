@@ -4,15 +4,16 @@ require 'json'
 # note: Style guide dictates not calling this class HTMLGenerator.
 
 class HtmlGenerator
-  def show
+  def show(id)
     print_header
-    puts "Action: show"
+    json = retrieve_data("http://lcboapi.com/products/#{id}")
+    print_product(json["result"])
     print_footer
   end
 
   def index
     print_header
-    json = retrieve_data
+    json = retrieve_data("http://lcboapi.com/stores/10/products?q=islay&page=2")
     json["result"].each do |result|
       print_product(result)
     end
@@ -59,8 +60,8 @@ class HtmlGenerator
     puts "</div>"
   end
 
-  def retrieve_data
-    response = open("http://lcboapi.com/stores/10/products?q=islay").read
+  def retrieve_data(url)
+    response = open(url).read
     json = JSON.parse(response)
   end
 
