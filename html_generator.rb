@@ -7,15 +7,15 @@ class HtmlGenerator
   def show(id)
     print_header
     json = retrieve_data("http://lcboapi.com/products/#{id}")
-    print_product(json["result"])
+    print_product_details(json["result"])
     print_footer
   end
 
   def index
     print_header
-    json = retrieve_data("http://lcboapi.com/stores/10/products?q=islay&page=2")
+    json = retrieve_data("http://lcboapi.com/stores/10/products?q=islay")
     json["result"].each do |result|
-      print_product(result)
+      print_product_summary(result)
     end
 
     print_footer
@@ -42,7 +42,25 @@ class HtmlGenerator
     puts "</html>"
   end
 
-  def print_product(product)
+  def print_product_summary(product)
+    puts "<div class='summary'>"
+    puts "<h2>#{product["name"]}</h2>"
+    if product["image_url"]
+      src = product["image_url"]
+    else
+      src = "http://upload.wikimedia.org/wikipedia/en/a/af/Question_mark.png"
+    end
+    puts "<img src=\"#{src}\" width=100 height=100>"
+    puts "<ul>"
+    puts "  <li><strong>Price:</strong> $#{cents_to_dollars(product["price_in_cents"])}</li>"
+    puts "  <li><strong>Format:</strong> #{product["package"]}</li>"
+    puts "  <li><strong>Categories:</strong> #{product["primary_category"]} / #{product["secondary_category"]} / #{product["tertiary_category"]} </li>"
+    puts "  <li><strong>Product number:</strong> #{product["product_no"]}</li>"
+    puts "</ul>"
+    puts "</div>"
+  end
+
+  def print_product_details(product)
     puts "<div>"
     puts "<h2>#{product["name"]}</h2>"
     if product["image_url"]
@@ -56,6 +74,8 @@ class HtmlGenerator
     puts "  <li><strong>Format:</strong> #{product["package"]}</li>"
     puts "  <li><strong>Categories:</strong> #{product["primary_category"]} / #{product["secondary_category"]} / #{product["tertiary_category"]} </li>"
     puts "  <li><strong>Product number:</strong> #{product["product_no"]}</li>"
+    puts "  <li><strong>Origin:</strong> #{product["origin"]}</li>"
+    puts "  <li><strong>Producer:</strong> #{product["producer_name"]}</li>"
     puts "</ul>"
     puts "</div>"
   end

@@ -2,24 +2,24 @@ body {
 	font-family: sans-serif;
 }
 
-div:nth-child(even)
+.summary:nth-child(even)
 {
 	background-color: #bbb;
 }
 
-div:nth-child(odd)
+.summary:nth-child(odd)
 {
 	background-color: #ccc;
 }
 
-div {
+.summary {
 	height: 250px;
 	width: 500px;
 	padding: 20px;
 	float: left;
 }
 
-div:hover {
+.summary:hover {
 	background-color: #eee;
 }
 
