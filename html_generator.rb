@@ -57,7 +57,7 @@ class HtmlGenerator
   end
 
   def retrieve_data
-    response = open("http://lcboapi.com/products.json/?where_not=is_beer").read
+    response = open("http://lcboapi.com/stores/10/products?q=islay").read
     json = JSON.parse(response)
   end
 
