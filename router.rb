@@ -7,7 +7,6 @@ require_relative 'html_generator'
 if ARGV.empty?
 	puts "Usage: [args]"
 else
-	puts "Arguments passed in: #{ARGV.join(" ")}"
   generator = HtmlGenerator.new
 	if ARGV[0] == "index"
     generator.index

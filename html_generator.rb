@@ -30,8 +30,10 @@ class HtmlGenerator
     puts "<html>"
     puts "  <head>"
     puts "    <title>Connoisseur</title>"
+    puts '    <link href="connoisseur.css" rel="stylesheet" type="text/css">'
     puts "  </head>"
     puts "  <body>"
+    puts "    <h1>Connoisseur</h1>"
   end
     
   def print_footer
@@ -40,12 +42,26 @@ class HtmlGenerator
   end
 
   def print_product(product)
-    puts "<p>#{product["name"]}</p>"
-    puts "<p>$#{product["price_in_cents"].to_f / 100.0}</p>"
+    puts "<div>"
+    puts "<h2>#{product["name"]}</h2>"
+    if product["image_url"]
+      puts "<img src=\"#{product["image_url"]}\" width=100 height=100>"
+    end
+    puts "<ul>"
+    puts "  <li><strong>Price:</strong> $#{cents_to_dollars(product["price_in_cents"])}</li>"
+    puts "  <li><strong>Format:</strong> #{product["package"]}</li>"
+    puts "  <li><strong>Categories:</strong> #{product["primary_category"]} / #{product["secondary_category"]} / #{product["tertiary_category"]} </li>"
+    puts "  <li><strong>Product number:</strong> #{product["product_no"]}</li>"
+    puts "</ul>"
+    puts "</div>"
   end
 
   def retrieve_data
-    response = open("http://lcboapi.com/products.json").read
+    response = open("http://lcboapi.com/products.json/?where_not=is_beer").read
     json = JSON.parse(response)
+  end
+
+  def cents_to_dollars(cents)
+    cents.to_f / 100
   end
 end

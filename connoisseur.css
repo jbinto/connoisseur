@@ -1,0 +1,21 @@
+div:nth-child(even)
+{
+	background-color: #ccc;
+}
+
+div:nth-child(odd)
+{
+	background-color: #eee;
+}
+
+div {
+	min-height: 150px;
+	padding: 20px;
+}
+
+img {
+
+	float: left;
+	border-radius: 100%;
+	margin-right: 50px;
+}
