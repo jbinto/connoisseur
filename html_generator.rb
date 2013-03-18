@@ -45,8 +45,11 @@ class HtmlGenerator
     puts "<div>"
     puts "<h2>#{product["name"]}</h2>"
     if product["image_url"]
-      puts "<img src=\"#{product["image_url"]}\" width=100 height=100>"
+      src = product["image_url"]
+    else
+      src = "http://upload.wikimedia.org/wikipedia/en/a/af/Question_mark.png"
     end
+    puts "<img src=\"#{src}\" width=100 height=100>"
     puts "<ul>"
     puts "  <li><strong>Price:</strong> $#{cents_to_dollars(product["price_in_cents"])}</li>"
     puts "  <li><strong>Format:</strong> #{product["package"]}</li>"
