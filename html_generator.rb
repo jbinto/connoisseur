@@ -16,6 +16,8 @@ class HtmlGenerator
   # Consider that some HTML will be common to all documents, so
   # let's write some shared methods for these.
 
+  # Mark the following methods internal to the class.
+  private             
   def print_header
     puts "<!doctype html>"
     puts "<html>"
