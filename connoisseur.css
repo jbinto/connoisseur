@@ -29,3 +29,11 @@ img {
 	border-radius: 100%;
 	margin-right: 50px;
 }
+
+h2 {
+	text-decoration: underline
+}
+
+ul li:first-child {
+	color: #cc0000;
+}
